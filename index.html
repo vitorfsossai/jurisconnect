@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="modal-overlay" id="authModal" onclick="closeModal(event)">
+    <div class="modal-overlay" id="authModal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span class="close-modal" id="closeModalButton">&times;</span>
             <div class="modal-tabs">
-                <button class="modal-tab active" type="button" onclick="switchTab('login')">Login</button>
-                <button class="modal-tab" type="button" onclick="switchTab('cadastro')">Cadastro</button>
+                <button class="modal-tab active" type="button" id="tabLogin">Login</button>
+                <button class="modal-tab" type="button" id="tabCadastro">Cadastro</button>
             </div>
 
             <div id="authFeedback" class="inline-feedback" style="display:none;"></div>
@@ -64,8 +64,8 @@
             JurisConnect
         </div>
         <div class="auth-buttons">
-            <button class="auth-button" type="button" onclick="showModal('login')">Login</button>
-            <button class="auth-button" type="button" onclick="showModal('cadastro')">Cadastro</button>
+            <button class="auth-button" type="button" id="loginButton">Login</button>
+            <button class="auth-button" type="button" id="cadastroButton">Cadastro</button>
         </div>
     </header>
 
@@ -80,7 +80,7 @@
                     <span>Fluxo padronizado</span>
                 </div>
             </div>
-            <button class="promo-button" type="button" onclick="showModal('cadastro')">
+            <button class="promo-button" type="button" id="cadastroButton">
                 <i class="fas fa-user-plus"></i> Cadastre-se Agora
             </button>
         </div>
@@ -110,82 +110,82 @@
         <section>
             <h2 class="section-title"><i class="fas fa-layer-group"></i> Áreas Jurídicas Disponíveis</h2>
             <div class="specialty-selector" id="specialtySelector">
-                <button class="specialty-card" type="button" data-specialty="civil" onclick="selectSpecialty('civil', this)">
+                <button class="specialty-card" type="button" data-specialty="civil">
                     <i class="fas fa-gavel"></i>
                     <h3>Direito Civil</h3>
                     <p>Contratos, indenizações, obrigações, responsabilidade civil.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="familia" onclick="selectSpecialty('familia', this)">
+                <button class="specialty-card" type="button" data-specialty="familia">
                     <i class="fas fa-people-roof"></i>
                     <h3>Família e Sucessões</h3>
                     <p>Divórcio, guarda, inventário, partilha, alimentos.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="trabalhista" onclick="selectSpecialty('trabalhista', this)">
+                <button class="specialty-card" type="button" data-specialty="trabalhista">
                     <i class="fas fa-briefcase"></i>
                     <h3>Direito Trabalhista</h3>
                     <p>Reclamações, recursos, cálculos e defesas.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="previdenciario" onclick="selectSpecialty('previdenciario', this)">
+                <button class="specialty-card" type="button" data-specialty="previdenciario">
                     <i class="fas fa-hand-holding-heart"></i>
                     <h3>Direito Previdenciário</h3>
                     <p>Aposentadorias, benefícios, revisões, RPPS e RGPS.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="consumidor" onclick="selectSpecialty('consumidor', this)">
+                <button class="specialty-card" type="button" data-specialty="consumidor">
                     <i class="fas fa-cart-shopping"></i>
                     <h3>Direito do Consumidor</h3>
                     <p>Falha de serviço, vícios, cobrança indevida, indenizações.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="empresarial" onclick="selectSpecialty('empresarial', this)">
+                <button class="specialty-card" type="button" data-specialty="empresarial">
                     <i class="fas fa-building"></i>
                     <h3>Direito Empresarial</h3>
                     <p>Societário, contratos, cobrança, compliance, recuperação.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="tributario" onclick="selectSpecialty('tributario', this)">
+                <button class="specialty-card" type="button" data-specialty="tributario">
                     <i class="fas fa-receipt"></i>
                     <h3>Direito Tributário</h3>
                     <p>Execução fiscal, compensação, repetição de indébito.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="administrativo" onclick="selectSpecialty('administrativo', this)">
+                <button class="specialty-card" type="button" data-specialty="administrativo">
                     <i class="fas fa-landmark"></i>
                     <h3>Direito Administrativo</h3>
                     <p>Licitações, PAD, concursos, servidores, improbidade.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="penal" onclick="selectSpecialty('penal', this)">
+                <button class="specialty-card" type="button" data-specialty="penal">
                     <i class="fas fa-scale-balanced"></i>
                     <h3>Direito Penal</h3>
                     <p>Defesas, recursos, memoriais, respostas à acusação.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="imobiliario" onclick="selectSpecialty('imobiliario', this)">
+                <button class="specialty-card" type="button" data-specialty="imobiliario">
                     <i class="fas fa-house"></i>
                     <h3>Direito Imobiliário</h3>
                     <p>Usucapião, posse, locação, regularização, distrato.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="ambiental" onclick="selectSpecialty('ambiental', this)">
+                <button class="specialty-card" type="button" data-specialty="ambiental">
                     <i class="fas fa-leaf"></i>
                     <h3>Direito Ambiental</h3>
                     <p>Licenciamento, autuações, TAC, responsabilidade ambiental.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="digital" onclick="selectSpecialty('digital', this)">
+                <button class="specialty-card" type="button" data-specialty="digital">
                     <i class="fas fa-shield-halved"></i>
                     <h3>Direito Digital e LGPD</h3>
                     <p>Privacidade, incidentes, contratos digitais, plataformas.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="saude" onclick="selectSpecialty('saude', this)">
+                <button class="specialty-card" type="button" data-specialty="saude">
                     <i class="fas fa-notes-medical"></i>
                     <h3>Direito da Saúde</h3>
                     <p>Planos de saúde, fornecimento de medicamentos, SUS.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="bancario" onclick="selectSpecialty('bancario', this)">
+                <button class="specialty-card" type="button" data-specialty="bancario">
                     <i class="fas fa-money-check-dollar"></i>
                     <h3>Direito Bancário</h3>
                     <p>Revisional, busca e apreensão, descontos indevidos.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="agrario" onclick="selectSpecialty('agrario', this)">
+                <button class="specialty-card" type="button" data-specialty="agrario">
                     <i class="fas fa-tractor"></i>
                     <h3>Direito Agrário</h3>
                     <p>Posse rural, arrendamento, servidão, questões fundiárias.</p>
                 </button>
-                <button class="specialty-card" type="button" data-specialty="eleitoral" onclick="selectSpecialty('eleitoral', this)">
+                <button class="specialty-card" type="button" data-specialty="eleitoral">
                     <i class="fas fa-check-to-slot"></i>
                     <h3>Direito Eleitoral</h3>
                     <p>Registro, propaganda, impugnações, prestação de contas.</p>
@@ -350,7 +350,7 @@
                     <div id="linksContainer">
                         <input type="url" placeholder="https://">
                     </div>
-                    <button type="button" class="secondary-button small-button" onclick="addLinkField()">
+                    <button type="button" class="secondary-button small-button" id="addLinkButton">
                         <i class="fas fa-plus"></i>Adicionar link
                     </button>
                 </div>
@@ -381,7 +381,7 @@
                     <i class="fab fa-whatsapp"></i>
                     Enviar comprovante e dados pelo WhatsApp
                 </a>
-                <button class="secondary-button" type="button" onclick="resetForm()">
+                <button class="secondary-button" type="button" id="resetFormButton">
                     <i class="fas fa-undo"></i>
                     Nova Solicitação
                 </button>
