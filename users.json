@@ -1,14 +1,10 @@
-{
-  "users": [
-    {
-      "email": "teste@jurisconnect.com.br",
-      "password": "123456",
-      "redirect": "pagina-destino.html"
-    },
-    {
-      "email": "advogado@exemplo.com.br",
-      "password": "senha123",
-      "redirect": "pagina-destino.html"
-    }
-  ]
-}
+[
+  {
+    "email": "teste@exemplo.com",
+    "senha": "123456"
+  },
+  {
+    "email": "advogado@exemplo.com",
+    "senha": "654321"
+  }
+]

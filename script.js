@@ -4,109 +4,42 @@
 const telefone = "5599999999999"; // ALTERAR PARA SEU NÚMERO
 
 // ==========================
-// AO CARREGAR A PÁGINA
+// CADASTRO → WHATSAPP
 // ==========================
-document.addEventListener("DOMContentLoaded", function () {
+document.getElementById("formCadastro")?.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    // ==========================
-    // ABRIR MODAIS
-    // ==========================
-    const btnLogin = document.getElementById("btnLogin");
-    const btnCadastro = document.getElementById("btnCadastro");
-    const btnHeroCadastro = document.getElementById("btnHeroCadastro");
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const telefoneUser = document.getElementById("telefone").value;
+    const area = document.getElementById("area").value;
 
-    if (btnLogin) {
-        btnLogin.addEventListener("click", () => {
-            document.getElementById("modalLogin").style.display = "flex";
-        });
-    }
+    const mensagem = `Novo cadastro:\n\nNome: ${nome}\nEmail: ${email}\nTelefone: ${telefoneUser}\nÁrea: ${area}`;
 
-    if (btnCadastro) {
-        btnCadastro.addEventListener("click", () => {
-            document.getElementById("modalCadastro").style.display = "flex";
-        });
-    }
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
 
-    if (btnHeroCadastro) {
-        btnHeroCadastro.addEventListener("click", () => {
-            document.getElementById("modalCadastro").style.display = "flex";
-        });
-    }
+    window.open(url, "_blank");
+});
 
-    // ==========================
-    // FECHAR MODAIS
-    // ==========================
-    document.querySelectorAll(".fechar").forEach(btn => {
-        btn.addEventListener("click", () => {
-            btn.closest(".modal").style.display = "none";
-        });
-    });
+// ==========================
+// ENVIO SOLICITAÇÃO → PIX + WHATSAPP
+// ==========================
+document.getElementById("formSolicitacao")?.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    window.addEventListener("click", (e) => {
-        document.querySelectorAll(".modal").forEach(modal => {
-            if (e.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-    });
+    const tipo = document.getElementById("tipoPeca").value;
+    const prazo = document.getElementById("prazo").value;
+    const descricao = document.getElementById("descricao").value;
 
-    // ==========================
-    // CADASTRO → WHATSAPP
-    // ==========================
-    const formCadastro = document.getElementById("formCadastro");
+    const mensagem = `Solicitação de serviço:\n\nTipo: ${tipo}\nPrazo: ${prazo}\nDescrição: ${descricao}\n\nEnviarei o comprovante do Pix em seguida.`;
 
-    if (formCadastro) {
-        formCadastro.addEventListener("submit", function (e) {
-            e.preventDefault();
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
 
-            const nome = document.getElementById("nome").value;
-            const email = document.getElementById("email").value;
-            const telefoneUser = document.getElementById("telefone").value;
-            const area = document.getElementById("area").value;
+    document.getElementById("areaPix").style.display = "block";
 
-            const mensagem = `Novo cadastro:%0A%0ANome: ${nome}%0AEmail: ${email}%0ATelefone: ${telefoneUser}%0AÁrea: ${area}`;
-
-            const url = `https://wa.me/${telefone}?text=${mensagem}`;
-
-            window.open(url, "_blank");
-        });
-    }
-
-    // ==========================
-    // ÁREAS JURÍDICAS → CLIQUE
-    // ==========================
-    document.querySelectorAll(".area-card").forEach(card => {
-        card.addEventListener("click", () => {
-            document.getElementById("modalSolicitacao").style.display = "flex";
-        });
-    });
-
-    // ==========================
-    // FORM SOLICITAÇÃO → PIX + WHATSAPP
-    // ==========================
-    const formSolicitacao = document.getElementById("formSolicitacao");
-
-    if (formSolicitacao) {
-        formSolicitacao.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const tipo = document.getElementById("tipoPeca").value;
-            const prazo = document.getElementById("prazo").value;
-            const descricao = document.getElementById("descricao").value;
-
-            const mensagem = `Solicitação de serviço:%0A%0ATipo: ${tipo}%0APrazo: ${prazo}%0ADescrição: ${descricao}%0A%0AEnviarei o comprovante do Pix em seguida.`;
-
-            const url = `https://wa.me/${telefone}?text=${mensagem}`;
-
-            document.getElementById("areaPix").style.display = "block";
-
-            const btnZap = document.getElementById("btnWhatsappPix");
-            if (btnZap) {
-                btnZap.onclick = () => window.open(url, "_blank");
-            }
-        });
-    }
-
+    document.getElementById("btnWhatsappPix").onclick = () => {
+        window.open(url, "_blank");
+    };
 });
 
 // ==========================
