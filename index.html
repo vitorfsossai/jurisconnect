@@ -5,307 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JurisConnect - Plataforma Jurídica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #1a365d;
-            --secondary-color: #cda05e;
-            --accent-color: #2b6cb0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        body {
-            background: #f8fafc;
-            color: #1a365d;
-        }
-
-        .header {
-            background: var(--primary-color);
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .auth-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background 0.3s;
-            cursor: pointer;
-        }
-
-        .promo-banner {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 1.5rem;
-            margin: 1rem auto;
-            border-radius: 12px;
-            width: 95%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .promo-content {
-            flex: 2;
-            text-align: left;
-        }
-
-        .promo-banner h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .promo-banner p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
-
-        .promo-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 8px;
-            transition: transform 0.3s;
-            max-width: 200px;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            animation: modalSlide 0.3s ease-out;
-        }
-
-        @keyframes modalSlide {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-tab {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background: #f0f4f8;
-            transition: all 0.3s;
-        }
-
-        .modal-tab.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary-color);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 3rem auto;
-            padding: 2.5rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-
-        .specialty-selector {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .specialty-card {
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .specialty-card.selected {
-            border-color: var(--accent-color);
-            background: #f0f4f8;
-        }
-
-        .form-section {
-            margin: 2.5rem 0;
-            padding: 1.5rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        button {
-            background: var(--primary-color);
-            color: white;
-            padding: 1.2rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin: 0 auto;
-        }
-
-        .payment-section {
-            display: none;
-            text-align: center;
-            padding: 3rem;
-            background: #f8fafc;
-            border-radius: 12px;
-        }
-
-        .qrcode-placeholder {
-            width: 250px;
-            height: 250px;
-            background: #e2e8f0;
-            margin: 2rem auto;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .success-message {
-            color: #065f46;
-            background: #d1fae5;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-            border-left: 4px solid #059669;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Modal Login/Cadastro -->
     <div class="modal-overlay" id="authModal" onclick="closeModal(event)">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <div class="modal-tabs">
-                <button class="modal-tab active" onclick="switchTab('login')">Login</button>
-                <button class="modal-tab" onclick="switchTab('cadastro')">Cadastro</button>
+                <button class="modal-tab active" type="button" onclick="switchTab('login')">Login</button>
+                <button class="modal-tab" type="button" onclick="switchTab('cadastro')">Cadastro</button>
             </div>
 
-            <form id="loginForm" style="display: block;">
+            <div id="authFeedback" class="inline-feedback" style="display:none;"></div>
+
+            <form id="loginForm" class="auth-form" style="display: block;">
                 <div class="form-group">
-                    <label><i class="fas fa-envelope"></i>E-mail:</label>
-                    <input type="email" required>
+                    <label for="loginEmail"><i class="fas fa-envelope"></i>E-mail:</label>
+                    <input id="loginEmail" type="email" required>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-lock"></i>Senha:</label>
-                    <input type="password" required>
+                    <label for="loginSenha"><i class="fas fa-lock"></i>Senha:</label>
+                    <input id="loginSenha" type="password" required>
                 </div>
-                <button type="submit" class="auth-button">Entrar</button>
+                <button type="submit" class="auth-button submit-auth-button">Entrar</button>
+                <p class="helper-text">Ao clicar em login, o sistema consulta um arquivo simples de usuários, valida e direciona para a próxima página em caso de sucesso.</p>
             </form>
 
-            <form id="cadastroForm" style="display: none;">
+            <form id="cadastroForm" class="auth-form" style="display: none;">
                 <div class="form-group">
-                    <label><i class="fas fa-user"></i>Nome Completo:</label>
-                    <input type="text" required>
+                    <label for="cadastroNome"><i class="fas fa-user"></i>Nome Completo:</label>
+                    <input id="cadastroNome" type="text" required>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-id-card"></i>Número OAB:</label>
-                    <input type="text" required>
+                    <label for="cadastroOab"><i class="fas fa-id-card"></i>Número OAB:</label>
+                    <input id="cadastroOab" type="text" required>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-lock"></i>Senha:</label>
-                    <input type="password" required>
+                    <label for="cadastroEmail"><i class="fas fa-envelope"></i>E-mail:</label>
+                    <input id="cadastroEmail" type="email" required>
                 </div>
-                <button type="submit" class="auth-button">Cadastrar</button>
+                <div class="form-group">
+                    <label for="cadastroTelefone"><i class="fas fa-phone"></i>Telefone:</label>
+                    <input id="cadastroTelefone" type="tel" required>
+                </div>
+                <div class="form-group">
+                    <label for="cadastroSenha"><i class="fas fa-lock"></i>Senha:</label>
+                    <input id="cadastroSenha" type="password" required>
+                </div>
+                <button type="submit" class="auth-button submit-auth-button">Cadastrar</button>
+                <p class="helper-text">O cadastro abre uma conversa no WhatsApp com os dados preenchidos para solicitação do cadastro.</p>
             </form>
         </div>
     </div>
@@ -316,166 +64,331 @@
             JurisConnect
         </div>
         <div class="auth-buttons">
-            <button class="auth-button" onclick="showModal('login')">Login</button>
-            <button class="auth-button" onclick="showModal('cadastro')">Cadastro</button>
+            <button class="auth-button" type="button" onclick="showModal('login')">Login</button>
+            <button class="auth-button" type="button" onclick="showModal('cadastro')">Cadastro</button>
         </div>
     </header>
 
-    <!-- Banner Promocional -->
-    <div class="promo-banner">
-        <div class="promo-content">
-            <h2><i class="fas fa-chart-line"></i> Aumente sua Renda como Advogado Delegado</h2>
-            <p>• Receba casos compatíveis com sua expertise<br>
-               • Flexibilidade total de horários<br>
-               • Plataforma segura com pagamentos garantidos</p>
+    <section class="hero-grid">
+        <div class="promo-banner">
+            <div class="promo-content">
+                <h2><i class="fas fa-chart-line"></i> Aumente sua Renda como Advogado Delegado</h2>
+                <p>Receba demandas compatíveis com sua expertise, trabalhe com flexibilidade e atue em uma plataforma com fluxo organizado de atendimento.</p>
+                <div class="promo-highlights">
+                    <span>Casos por especialidade</span>
+                    <span>Flexibilidade de agenda</span>
+                    <span>Fluxo padronizado</span>
+                </div>
+            </div>
+            <button class="promo-button" type="button" onclick="showModal('cadastro')">
+                <i class="fas fa-user-plus"></i> Cadastre-se Agora
+            </button>
         </div>
-        <button class="promo-button" onclick="showModal('cadastro')">
-            <i class="fas fa-user-plus"></i> Cadastre-se Agora
-        </button>
-    </div>
 
-    <div class="container">
-        <h1>Delegação de Serviços Jurídicos</h1>
-
-        <div class="specialty-selector">
-            <div class="specialty-card" onclick="selectSpecialty('civil')">
-                <i class="fas fa-gavel"></i>
-                <h3>Direito Civil</h3>
+        <div class="promo-banner secondary-banner">
+            <div class="promo-content">
+                <h2><i class="fas fa-file-signature"></i> Não está com tempo para peticionar? Delegue tarefas para outros advogados!</h2>
+                <p>Solicite apoio para petições, recursos, incidentes, pareceres, diligências, audiências e outros serviços jurídicos, com organização por área e por tipo de demanda.</p>
+                <div class="promo-highlights">
+                    <span>Peças e recursos</span>
+                    <span>Suporte consultivo</span>
+                    <span>Apoio operacional</span>
+                </div>
             </div>
-            <div class="specialty-card" onclick="selectSpecialty('trabalhista')">
-                <i class="fas fa-briefcase"></i>
-                <h3>Direito Trabalhista</h3>
-            </div>
-            <div class="specialty-card" onclick="selectSpecialty('empresarial')">
-                <i class="fas fa-building"></i>
-                <h3>Direito Empresarial</h3>
-            </div>
+            <a class="promo-button" href="#solicitacao">
+                <i class="fas fa-paper-plane"></i> Enviar Solicitação
+            </a>
         </div>
+    </section>
+
+    <main class="container" id="solicitacao">
+        <section class="section-heading">
+            <h1>Delegação de Serviços Jurídicos</h1>
+            <p>Selecione a área de atuação e detalhe a necessidade. Os serviços abaixo foram organizados por áreas jurídicas usuais da advocacia brasileira.</p>
+        </section>
+
+        <section>
+            <h2 class="section-title"><i class="fas fa-layer-group"></i> Áreas Jurídicas Disponíveis</h2>
+            <div class="specialty-selector" id="specialtySelector">
+                <button class="specialty-card" type="button" data-specialty="civil" onclick="selectSpecialty('civil', this)">
+                    <i class="fas fa-gavel"></i>
+                    <h3>Direito Civil</h3>
+                    <p>Contratos, indenizações, obrigações, responsabilidade civil.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="familia" onclick="selectSpecialty('familia', this)">
+                    <i class="fas fa-people-roof"></i>
+                    <h3>Família e Sucessões</h3>
+                    <p>Divórcio, guarda, inventário, partilha, alimentos.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="trabalhista" onclick="selectSpecialty('trabalhista', this)">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Direito Trabalhista</h3>
+                    <p>Reclamações, recursos, cálculos e defesas.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="previdenciario" onclick="selectSpecialty('previdenciario', this)">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Direito Previdenciário</h3>
+                    <p>Aposentadorias, benefícios, revisões, RPPS e RGPS.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="consumidor" onclick="selectSpecialty('consumidor', this)">
+                    <i class="fas fa-cart-shopping"></i>
+                    <h3>Direito do Consumidor</h3>
+                    <p>Falha de serviço, vícios, cobrança indevida, indenizações.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="empresarial" onclick="selectSpecialty('empresarial', this)">
+                    <i class="fas fa-building"></i>
+                    <h3>Direito Empresarial</h3>
+                    <p>Societário, contratos, cobrança, compliance, recuperação.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="tributario" onclick="selectSpecialty('tributario', this)">
+                    <i class="fas fa-receipt"></i>
+                    <h3>Direito Tributário</h3>
+                    <p>Execução fiscal, compensação, repetição de indébito.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="administrativo" onclick="selectSpecialty('administrativo', this)">
+                    <i class="fas fa-landmark"></i>
+                    <h3>Direito Administrativo</h3>
+                    <p>Licitações, PAD, concursos, servidores, improbidade.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="penal" onclick="selectSpecialty('penal', this)">
+                    <i class="fas fa-scale-balanced"></i>
+                    <h3>Direito Penal</h3>
+                    <p>Defesas, recursos, memoriais, respostas à acusação.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="imobiliario" onclick="selectSpecialty('imobiliario', this)">
+                    <i class="fas fa-house"></i>
+                    <h3>Direito Imobiliário</h3>
+                    <p>Usucapião, posse, locação, regularização, distrato.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="ambiental" onclick="selectSpecialty('ambiental', this)">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Direito Ambiental</h3>
+                    <p>Licenciamento, autuações, TAC, responsabilidade ambiental.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="digital" onclick="selectSpecialty('digital', this)">
+                    <i class="fas fa-shield-halved"></i>
+                    <h3>Direito Digital e LGPD</h3>
+                    <p>Privacidade, incidentes, contratos digitais, plataformas.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="saude" onclick="selectSpecialty('saude', this)">
+                    <i class="fas fa-notes-medical"></i>
+                    <h3>Direito da Saúde</h3>
+                    <p>Planos de saúde, fornecimento de medicamentos, SUS.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="bancario" onclick="selectSpecialty('bancario', this)">
+                    <i class="fas fa-money-check-dollar"></i>
+                    <h3>Direito Bancário</h3>
+                    <p>Revisional, busca e apreensão, descontos indevidos.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="agrario" onclick="selectSpecialty('agrario', this)">
+                    <i class="fas fa-tractor"></i>
+                    <h3>Direito Agrário</h3>
+                    <p>Posse rural, arrendamento, servidão, questões fundiárias.</p>
+                </button>
+                <button class="specialty-card" type="button" data-specialty="eleitoral" onclick="selectSpecialty('eleitoral', this)">
+                    <i class="fas fa-check-to-slot"></i>
+                    <h3>Direito Eleitoral</h3>
+                    <p>Registro, propaganda, impugnações, prestação de contas.</p>
+                </button>
+            </div>
+        </section>
 
         <form id="mainForm" style="display: none;">
+            <div class="form-section">
+                <h2><i class="fas fa-screwdriver-wrench"></i> Serviços Disponíveis por Área</h2>
+                <p class="section-intro">Selecione a área jurídica e veja abaixo serviços compatíveis para delegação.</p>
+                <div id="selectedAreaInfo" class="selected-area-info">Nenhuma área selecionada.</div>
+                <div id="serviceOptions" class="service-options"></div>
+            </div>
+
             <div class="form-section">
                 <h2><i class="fas fa-edit"></i> Tipo de Peça Jurídica</h2>
                 <select id="tipoPeca" required>
                     <option value="">Selecione...</option>
-                    <option>Petição Inicial</option>
-                    <option>Contestação</option>
-                    <option>Recurso</option>
-                    <option>Memorial</option>
+                    <optgroup label="Peças iniciais e de conhecimento">
+                        <option>Petição Inicial</option>
+                        <option>Ação de Cobrança</option>
+                        <option>Ação Monitória</option>
+                        <option>Ação de Execução</option>
+                        <option>Ação de Cumprimento de Sentença</option>
+                        <option>Mandado de Segurança</option>
+                        <option>Ação Rescisória</option>
+                        <option>Ação Popular</option>
+                        <option>Ação Civil Pública</option>
+                        <option>Ação Declaratória</option>
+                        <option>Ação Anulatória</option>
+                        <option>Ação Indenizatória</option>
+                        <option>Ação Revisional</option>
+                        <option>Ação de Obrigação de Fazer</option>
+                        <option>Ação de Obrigação de Não Fazer</option>
+                        <option>Ação Possessória</option>
+                        <option>Ação de Usucapião</option>
+                        <option>Ação de Despejo</option>
+                        <option>Ação de Inventário</option>
+                        <option>Ação de Divórcio</option>
+                        <option>Ação de Alimentos</option>
+                        <option>Ação Trabalhista</option>
+                        <option>Queixa-Crime</option>
+                        <option>Representação Criminal</option>
+                    </optgroup>
+                    <optgroup label="Defesas e manifestações">
+                        <option>Contestação</option>
+                        <option>Impugnação à Contestação</option>
+                        <option>Réplica</option>
+                        <option>Exceção de Pré-Executividade</option>
+                        <option>Embargos à Execução</option>
+                        <option>Impugnação ao Cumprimento de Sentença</option>
+                        <option>Manifestação sobre Documentos</option>
+                        <option>Memoriais</option>
+                        <option>Contrarrazões</option>
+                        <option>Alegações Finais</option>
+                        <option>Resposta à Acusação</option>
+                        <option>Defesa Prévia</option>
+                        <option>Defesa Administrativa</option>
+                        <option>Impugnação Administrativa</option>
+                        <option>Justificação</option>
+                    </optgroup>
+                    <optgroup label="Recursos e impugnações">
+                        <option>Embargos de Declaração</option>
+                        <option>Apelação</option>
+                        <option>Agravo de Instrumento</option>
+                        <option>Agravo Interno</option>
+                        <option>Agravo em Recurso Especial</option>
+                        <option>Agravo em Recurso Extraordinário</option>
+                        <option>Recurso Inominado</option>
+                        <option>Recurso Ordinário</option>
+                        <option>Recurso Especial</option>
+                        <option>Recurso Extraordinário</option>
+                        <option>Recurso em Sentido Estrito</option>
+                        <option>Agravo de Petição</option>
+                        <option>Embargos de Divergência</option>
+                        <option>Carta Testemunhável</option>
+                        <option>Pedido de Reconsideração</option>
+                    </optgroup>
+                    <optgroup label="Tutelas, incidentes e pedidos acessórios">
+                        <option>Pedido de Tutela de Urgência</option>
+                        <option>Pedido de Tutela de Evidência</option>
+                        <option>Pedido Liminar</option>
+                        <option>Habeas Corpus</option>
+                        <option>Habeas Data</option>
+                        <option>Pedido de Alvará Judicial</option>
+                        <option>Incidente de Desconsideração da Personalidade Jurídica</option>
+                        <option>Incidente de Uniformização</option>
+                        <option>Impugnação ao Valor da Causa</option>
+                        <option>Impugnação à Justiça Gratuita</option>
+                        <option>Exibição de Documentos</option>
+                        <option>Produção Antecipada de Provas</option>
+                        <option>Pedido de Habilitação</option>
+                        <option>Pedido de Homologação de Acordo</option>
+                        <option>Pedido de Desarquivamento</option>
+                        <option>Pedido de Expedição de Ofício</option>
+                    </optgroup>
+                    <optgroup label="Consultivo e extrajudicial">
+                        <option>Parecer Jurídico</option>
+                        <option>Notificação Extrajudicial</option>
+                        <option>Contratos</option>
+                        <option>Aditivo Contratual</option>
+                        <option>Distrato</option>
+                        <option>Termo de Acordo</option>
+                        <option>Termo de Confissão de Dívida</option>
+                        <option>Procuração</option>
+                        <option>Requerimento Administrativo</option>
+                        <option>Recurso Administrativo</option>
+                        <option>Contrarrazões Administrativas</option>
+                        <option>Defesa em PAD</option>
+                        <option>Consulta Jurídica Escrita</option>
+                    </optgroup>
                 </select>
             </div>
 
             <div class="form-section">
                 <h2><i class="fas fa-user-tie"></i> Dados do Solicitante</h2>
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i>Nome Completo:</label>
-                    <input type="text" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-id-card"></i>Número da OAB:</label>
-                    <input type="text" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-phone"></i>Telefone:</label>
-                    <input type="tel" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-envelope"></i>E-mail:</label>
-                    <input type="email" required>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="solicitanteNome"><i class="fas fa-user"></i>Nome Completo:</label>
+                        <input id="solicitanteNome" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="solicitanteOab"><i class="fas fa-id-card"></i>Número da OAB:</label>
+                        <input id="solicitanteOab" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="solicitanteTelefone"><i class="fas fa-phone"></i>Telefone:</label>
+                        <input id="solicitanteTelefone" type="tel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="solicitanteEmail"><i class="fas fa-envelope"></i>E-mail:</label>
+                        <input id="solicitanteEmail" type="email" required>
+                    </div>
                 </div>
             </div>
 
             <div class="form-section">
                 <h2><i class="fas fa-balance-scale"></i> Detalhes da Demanda</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="prazo"><i class="fas fa-clock"></i>Prazo desejado:</label>
+                        <select id="prazo" required>
+                            <option value="">Selecione...</option>
+                            <option>Urgente - até 24 horas</option>
+                            <option>Prioritário - até 48 horas</option>
+                            <option>Normal - até 5 dias úteis</option>
+                            <option>Sem urgência específica</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tribunal"><i class="fas fa-building-columns"></i>Tribunal / Órgão:</label>
+                        <input id="tribunal" type="text" placeholder="Ex.: TJRO, TRT14, INSS, Município, Autarquia">
+                    </div>
+                </div>
                 <div class="form-group">
-                    <label><i class="fas fa-clipboard-list"></i>Descrição do Caso:</label>
-                    <textarea rows="6" required></textarea>
+                    <label for="descricaoCaso"><i class="fas fa-clipboard-list"></i>Descrição do Caso:</label>
+                    <textarea id="descricaoCaso" rows="6" required></textarea>
                 </div>
                 <div class="form-group">
                     <label><i class="fas fa-link"></i>Links de Arquivos:</label>
                     <div id="linksContainer">
                         <input type="url" placeholder="https://">
                     </div>
-                    <button type="button" class="auth-button" onclick="addLinkField()" style="margin-top: 0.5rem;">
+                    <button type="button" class="secondary-button small-button" onclick="addLinkField()">
                         <i class="fas fa-plus"></i>Adicionar link
                     </button>
                 </div>
+                <div class="form-group">
+                    <label for="observacoes"><i class="fas fa-circle-info"></i>Observações adicionais:</label>
+                    <textarea id="observacoes" rows="4" placeholder="Ex.: prazo fatal, estilo da peça, pontos obrigatórios, documentos importantes."></textarea>
+                </div>
             </div>
 
-            <button type="submit">
+            <button type="submit" class="primary-submit-button">
                 <i class="fas fa-paper-plane"></i>
                 Enviar Solicitação
             </button>
         </form>
 
-        <div class="payment-section">
+        <section class="payment-section" id="paymentSection">
             <div class="success-message">
                 <i class="fas fa-check-circle"></i>
-                Solicitação recebida! Advogado sendo designado.
+                Solicitação registrada. Após o pagamento, envie o comprovante e os dados da solicitação pelo WhatsApp.
             </div>
+            <div class="summary-box" id="submissionSummary"></div>
             <div class="qrcode-placeholder">
                 <i class="fas fa-qrcode fa-3x"></i>
+                <span>QR Code Pix</span>
             </div>
-            <button class="auth-button" onclick="resetForm()">
-                <i class="fas fa-undo"></i>
-                Nova Solicitação
-            </button>
-        </div>
-    </div>
+            <div class="payment-actions">
+                <a class="auth-button whatsapp-button" id="paymentWhatsappButton" href="#" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                    Enviar comprovante e dados pelo WhatsApp
+                </a>
+                <button class="secondary-button" type="button" onclick="resetForm()">
+                    <i class="fas fa-undo"></i>
+                    Nova Solicitação
+                </button>
+            </div>
+        </section>
+    </main>
 
-    <script>
-        // Controle do Modal
-        function showModal(type) {
-            document.getElementById('authModal').style.display = 'flex';
-            switchTab(type);
-        }
-
-        function closeModal(event) {
-            if(event.target === document.getElementById('authModal')) {
-                document.getElementById('authModal').style.display = 'none';
-            }
-        }
-
-        function switchTab(type) {
-            document.querySelectorAll('.modal-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('form').forEach(form => form.style.display = 'none');
-            
-            document.getElementById(`${type}Form`).style.display = 'block';
-            document.querySelector(`button[onclick="switchTab('${type}')"]`).classList.add('active');
-        }
-
-        // Controle de Links
-        function addLinkField() {
-            const container = document.getElementById('linksContainer');
-            const newInput = document.createElement('input');
-            newInput.type = 'url';
-            newInput.placeholder = 'https://';
-            newInput.style.marginTop = '0.5rem';
-            container.appendChild(newInput);
-        }
-
-        // Controle do Formulário Principal
-        function selectSpecialty(specialty) {
-            document.querySelectorAll('.specialty-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            event.currentTarget.classList.add('selected');
-            document.getElementById('mainForm').style.display = 'block';
-        }
-
-        function resetForm() {
-            document.getElementById('mainForm').reset();
-            document.querySelectorAll('.specialty-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            document.getElementById('mainForm').style.display = 'none';
-            document.querySelector('.payment-section').style.display = 'none';
-        }
-
-        document.getElementById('mainForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            document.querySelector('.payment-section').style.display = 'block';
-            document.getElementById('mainForm').style.display = 'none';
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

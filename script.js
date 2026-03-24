@@ -1,23 +1,74 @@
-document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+// ==========================
+// CONFIGURAÇÃO WHATSAPP
+// ==========================
+const telefone = "5599999999999"; // ALTERAR PARA SEU NÚMERO
 
-    // Captura os dados do formulário
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const facts = document.getElementById('facts').value;
+// ==========================
+// CADASTRO → WHATSAPP
+// ==========================
+document.getElementById("formCadastro")?.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    // Formata a mensagem para o WhatsApp
-    const message = `Olá, meu nome é ${name}. Gostaria de falar sobre o seguinte caso: ${facts}. Meu telefone é ${phone}.`;
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const telefoneUser = document.getElementById("telefone").value;
+    const area = document.getElementById("area").value;
 
-    // Codifica a mensagem para uso em URL
-    const encodedMessage = encodeURIComponent(message);
+    const mensagem = `Novo cadastro:\n\nNome: ${nome}\nEmail: ${email}\nTelefone: ${telefoneUser}\nÁrea: ${area}`;
 
-    // Número de telefone do escritório (substitua pelo número correto)
-    const whatsappNumber = '5569981593723'; // Exemplo: (11) 99999-9999
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
 
-    // Cria o link do WhatsApp
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-    // Abre o WhatsApp em uma nova aba
-    window.open(whatsappUrl, '_blank');
+    window.open(url, "_blank");
 });
+
+// ==========================
+// ENVIO SOLICITAÇÃO → PIX + WHATSAPP
+// ==========================
+document.getElementById("formSolicitacao")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const tipo = document.getElementById("tipoPeca").value;
+    const prazo = document.getElementById("prazo").value;
+    const descricao = document.getElementById("descricao").value;
+
+    const mensagem = `Solicitação de serviço:\n\nTipo: ${tipo}\nPrazo: ${prazo}\nDescrição: ${descricao}\n\nEnviarei o comprovante do Pix em seguida.`;
+
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+
+    document.getElementById("areaPix").style.display = "block";
+
+    document.getElementById("btnWhatsappPix").onclick = () => {
+        window.open(url, "_blank");
+    };
+});
+
+// ==========================
+// LOGIN SIMPLES (users.json)
+// ==========================
+async function login() {
+    const email = document.getElementById("loginEmail").value;
+    const senha = document.getElementById("loginSenha").value;
+
+    try {
+        const response = await fetch("users.json");
+        const users = await response.json();
+
+        const usuario = users.find(u => u.email === email);
+
+        if (!usuario) {
+            alert("Não há cadastro para este e-mail.");
+            return;
+        }
+
+        if (usuario.senha !== senha) {
+            alert("Senha incorreta.");
+            return;
+        }
+
+        // SUCESSO
+        window.location.href = "pagina-destino.html";
+
+    } catch (error) {
+        alert("Erro ao carregar usuários.");
+    }
+}
