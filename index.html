@@ -1,363 +1,212 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advogados Delegados</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JurisConnect | Delegação jurídica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">Advogados Delegados</div>
-    <nav class="top-actions">
-      <button id="btnLogin" class="btn btn-outline" type="button">Login</button>
-      <button id="btnCadastro" class="btn btn-primary" type="button">Cadastro</button>
-    </nav>
+  <header class="site-header">
+    <div>
+      <div class="brand">JurisConnect</div>
+      <div class="brand-subtitle">Marketplace jurídico para delegação de serviços entre advogados</div>
+    </div>
+    <div class="header-actions">
+      <button id="openAuthBtn" class="btn btn-outline">Login / Cadastro</button>
+      <a href="#orderForm" class="btn btn-primary">Solicitar peça</a>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow">Plataforma de delegação de serviços jurídicos</p>
-        <h1>Aumente sua Renda como Advogado Delegado</h1>
-        <p>
-          Receba solicitações, organize demandas e conecte-se com colegas para ampliar sua atuação.
-        </p>
-        <button id="btnHeroCadastro" class="btn btn-primary btn-lg" type="button">Cadastre-se Agora</button>
+  <section class="hero">
+    <div>
+      <span class="badge">Modelo marketplace jurídico</span>
+      <h1>Transforme o seu site em um verdadeiro “Uber de advogados”.</h1>
+      <p>
+        Receba solicitações, calcule automaticamente o valor da peça, gere checkout seguro,
+        acompanhe o status do pedido e administre tudo em um painel central.
+      </p>
+      <div class="hero-actions">
+        <a href="#orderForm" class="btn btn-primary">Criar solicitação</a>
+        <button id="openRegisterBtn" class="btn btn-outline">Cadastre-se como delegado</button>
       </div>
+      <div class="hero-highlights">
+        <div class="mini-card"><strong>Pagamento seguro</strong><span>Mercado Pago</span></div>
+        <div class="mini-card"><strong>Painel admin</strong><span>Pedidos e preços</span></div>
+        <div class="mini-card"><strong>Fluxo automático</strong><span>Pedido + cobrança</span></div>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <h2>Fluxo da operação</h2>
+      <ol>
+        <li>Advogado solicita a demanda</li>
+        <li>O sistema calcula o preço final</li>
+        <li>O checkout é gerado no site</li>
+        <li>O pagamento fica vinculado ao pedido</li>
+        <li>O administrador distribui a tarefa</li>
+      </ol>
+    </div>
+  </section>
+
+  <main class="main-grid">
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <h2>Áreas jurídicas e tipos de peça</h2>
+          <p>Selecione abaixo a peça desejada. O valor será calculado automaticamente.</p>
+        </div>
+      </div>
+      <div id="piecesGrid" class="pieces-grid"></div>
     </section>
 
-    <section class="highlight-section">
-      <div class="highlight-card">
-        <h2>Não está com tempo para peticionar? Delegue tarefas para outros advogados!</h2>
-        <p>Publique sua demanda, encontre apoio jurídico por área e acompanhe o fluxo da solicitação com praticidade.</p>
+    <section class="card sticky-card">
+      <div class="section-head">
+        <div>
+          <h2>Nova solicitação</h2>
+          <p>Preencha os dados para criar o pedido.</p>
+        </div>
       </div>
-    </section>
 
-    <section class="services-section">
-      <h2>Delegação de Serviços Jurídicos</h2>
-      <div class="services-grid">
-        <div class="service-box">
-          <h3>Direito Civil</h3>
-          <ul>
-            <li>Ações de cobrança</li>
-            <li>Execução de título extrajudicial</li>
-            <li>Indenizações por danos morais e materiais</li>
-            <li>Usucapião</li>
-            <li>Obrigações de fazer e não fazer</li>
-            <li>Contratos e rescisões contratuais</li>
-          </ul>
+      <form id="orderForm" class="form-grid">
+        <div class="field full">
+          <label for="customerName">Nome</label>
+          <input id="customerName" name="customerName" type="text" required>
         </div>
-        <div class="service-box">
-          <h3>Direito do Consumidor</h3>
-          <ul>
-            <li>Ações contra descontos indevidos</li>
-            <li>Repetição de indébito</li>
-            <li>Falha na prestação de serviços</li>
-            <li>Negativação indevida</li>
-            <li>Planos de saúde</li>
-            <li>Concessionárias e serviços públicos</li>
-          </ul>
+        <div class="field">
+          <label for="customerEmail">E-mail</label>
+          <input id="customerEmail" name="customerEmail" type="email" required>
         </div>
-        <div class="service-box">
-          <h3>Direito Previdenciário</h3>
-          <ul>
-            <li>Aposentadorias</li>
-            <li>Pensão por morte</li>
-            <li>Auxílio-doença</li>
-            <li>BPC/LOAS</li>
-            <li>Revisões de benefício</li>
-            <li>Planejamento previdenciário</li>
-          </ul>
+        <div class="field">
+          <label for="customerPhone">Telefone</label>
+          <input id="customerPhone" name="customerPhone" type="text" required>
         </div>
-        <div class="service-box">
-          <h3>Direito Trabalhista</h3>
-          <ul>
-            <li>Reclamação trabalhista</li>
-            <li>Defesas e contestações</li>
-            <li>Horas extras e verbas rescisórias</li>
-            <li>Reconhecimento de vínculo</li>
-            <li>Assédio moral</li>
-            <li>Recursos trabalhistas</li>
-          </ul>
+        <div class="field full">
+          <label for="pieceId">Tipo de peça</label>
+          <select id="pieceId" name="pieceId" required></select>
         </div>
-        <div class="service-box">
-          <h3>Direito Penal</h3>
-          <ul>
-            <li>Resposta à acusação</li>
-            <li>Queixa-crime</li>
-            <li>Memoriais</li>
-            <li>Pedido de liberdade</li>
-            <li>Habeas corpus</li>
-            <li>Recursos criminais</li>
-          </ul>
+        <div class="field">
+          <label for="urgency">Urgência</label>
+          <select id="urgency" name="urgency">
+            <option value="normal">Prazo normal</option>
+            <option value="24h">Até 24 horas</option>
+            <option value="12h">Até 12 horas</option>
+          </select>
         </div>
-        <div class="service-box">
-          <h3>Direito de Família e Sucessões</h3>
-          <ul>
-            <li>Divórcio</li>
-            <li>Alimentos</li>
-            <li>Guarda e regulamentação de visitas</li>
-            <li>Inventário e arrolamento</li>
-            <li>Reconhecimento e dissolução de união estável</li>
-            <li>Interdição e curatela</li>
-          </ul>
+        <div class="field">
+          <label for="deadline">Prazo desejado</label>
+          <input id="deadline" name="deadline" type="text" placeholder="Ex.: 03/04/2026 às 18h">
         </div>
-        <div class="service-box">
-          <h3>Direito Empresarial</h3>
-          <ul>
-            <li>Contratos empresariais</li>
-            <li>Execuções e cobranças</li>
-            <li>Recuperação de crédito</li>
-            <li>Societário</li>
-            <li>Due diligence</li>
-            <li>Pareceres jurídicos</li>
-          </ul>
+        <div class="field check">
+          <label><input id="hearingSupport" name="hearingSupport" type="checkbox"> Incluir audiência/diligência</label>
         </div>
-        <div class="service-box">
-          <h3>Direito Tributário e Administrativo</h3>
-          <ul>
-            <li>Mandado de segurança</li>
-            <li>Execução fiscal</li>
-            <li>Defesas administrativas</li>
-            <li>Licitações e contratos públicos</li>
-            <li>Recursos administrativos</li>
-            <li>Petições para servidores públicos</li>
-          </ul>
+        <div class="field check">
+          <label><input id="weekendDelivery" name="weekendDelivery" type="checkbox"> Entrega em fim de semana/feriado</label>
         </div>
-      </div>
-    </section>
+        <div class="field full">
+          <label for="description">Descrição da necessidade</label>
+          <textarea id="description" name="description" rows="5" placeholder="Explique o caso, informe o objetivo, fundamentos desejados e observações relevantes."></textarea>
+        </div>
 
-    <section class="areas-section">
-      <h2>Áreas Jurídicas Disponíveis</h2>
-      <div class="areas-grid">
-        <div class="area-card" tabindex="0">Civil</div>
-        <div class="area-card" tabindex="0">Consumidor</div>
-        <div class="area-card" tabindex="0">Previdenciário</div>
-        <div class="area-card" tabindex="0">Trabalhista</div>
-        <div class="area-card" tabindex="0">Penal</div>
-        <div class="area-card" tabindex="0">Família</div>
-        <div class="area-card" tabindex="0">Sucessões</div>
-        <div class="area-card" tabindex="0">Tributário</div>
-        <div class="area-card" tabindex="0">Administrativo</div>
-        <div class="area-card" tabindex="0">Empresarial</div>
-        <div class="area-card" tabindex="0">Imobiliário</div>
-        <div class="area-card" tabindex="0">Juizados Especiais</div>
-      </div>
-    </section>
+        <div class="price-box full" id="liveEstimate">
+          <div>
+            <span>Valor estimado</span>
+            <strong id="estimateValue">R$ 0,00</strong>
+          </div>
+          <small>O valor final será confirmado ao gerar o pedido.</small>
+        </div>
 
-    <section class="pieces-section">
-      <h2>Tipo de Peça Jurídica</h2>
-      <div class="pieces-list">
-        <span>Petição inicial</span>
-        <span>Contestação</span>
-        <span>Réplica</span>
-        <span>Impugnação</span>
-        <span>Embargos de declaração</span>
-        <span>Agravo de instrumento</span>
-        <span>Apelação</span>
-        <span>Recurso inominado</span>
-        <span>Embargos à execução</span>
-        <span>Cumprimento de sentença</span>
-        <span>Manifestação</span>
-        <span>Parecer jurídico</span>
-        <span>Memoriais</span>
-        <span>Habeas corpus</span>
-        <span>Mandado de segurança</span>
-        <span>Queixa-crime</span>
-        <span>Resposta à acusação</span>
-        <span>Alegações finais</span>
-        <span>Reclamação trabalhista</span>
-        <span>Recurso ordinário</span>
-        <span>Agravo interno</span>
-        <span>Recurso especial</span>
-        <span>Recurso extraordinário</span>
-        <span>Contratos</span>
-        <span>Notificação extrajudicial</span>
-        <span>Procuração</span>
-        <span>Requerimento administrativo</span>
-      </div>
+        <button type="submit" class="btn btn-primary full">Gerar pedido e pagamento</button>
+      </form>
     </section>
   </main>
 
-  <div class="modal" id="modalCadastro">
-    <div class="modal-content">
-      <button class="fechar" type="button">×</button>
-      <h3>Cadastro</h3>
-      <form id="formCadastro">
-        <label for="nome">Nome</label>
-        <input id="nome" type="text" required />
-
-        <label for="email">E-mail</label>
-        <input id="email" type="email" required />
-
-        <label for="telefoneUsuario">Telefone</label>
-        <input id="telefoneUsuario" type="text" required />
-
-        <label for="area">Área de atuação</label>
-        <input id="area" type="text" required />
-
-        <button class="btn btn-primary full" type="submit">Cadastrar</button>
-      </form>
-    </div>
-  </div>
-
-  <div class="modal" id="modalLogin">
-    <div class="modal-content">
-      <button class="fechar" type="button">×</button>
-      <h3>Login</h3>
-      <label for="loginEmail">E-mail</label>
-      <input id="loginEmail" type="email" />
-
-      <label for="loginSenha">Senha</label>
-      <input id="loginSenha" type="password" />
-
-      <button class="btn btn-primary full" type="button" onclick="login()">Entrar</button>
-    </div>
-  </div>
-
-  <div class="modal" id="modalSolicitacao">
-    <div class="modal-content modal-lg">
-      <button class="fechar" type="button">×</button>
-      <h3>Enviar solicitação</h3>
-      <form id="formSolicitacao">
-        <label for="tipoPeca">Tipo de peça</label>
-        <input id="tipoPeca" type="text" required />
-
-        <label for="prazo">Prazo</label>
-        <input id="prazo" type="text" required />
-
-        <label for="descricao">Descrição</label>
-        <textarea id="descricao" rows="5" required></textarea>
-
-        <button class="btn btn-primary full" type="submit">Enviar Solicitação</button>
-      </form>
-
-      <div id="areaPix" class="pix-box">
-        <h4>Pagamento via Pix</h4>
-        <p>Após o envio da solicitação, envie o comprovante também pelo WhatsApp.</p>
-        <div class="qr-placeholder">QR CODE PIX</div>
-        <button id="btnWhatsappPix" class="btn btn-success full" type="button">Ir para o WhatsApp</button>
+  <section id="paymentSection" class="card payment-card hidden">
+    <div class="section-head">
+      <div>
+        <h2>Pedido criado</h2>
+        <p>Revise os dados e prossiga com o pagamento.</p>
       </div>
     </div>
+
+    <div id="orderSummary" class="summary-grid"></div>
+
+    <div class="payment-actions">
+      <div id="paymentFeedback" class="feedback"></div>
+      <div id="walletBrick_container"></div>
+      <div class="payment-buttons">
+        <a id="externalPaymentLink" class="btn btn-primary hidden" target="_blank" rel="noopener">Pagar em ambiente seguro</a>
+        <a id="whatsappLink" class="btn btn-outline hidden" target="_blank" rel="noopener">Enviar comprovante e dados no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="card panel-preview">
+    <div class="section-head">
+      <div>
+        <h2>Painel de administração</h2>
+        <p>O pacote também inclui uma nova página administrativa.</p>
+      </div>
+      <a href="admin.html" class="btn btn-outline">Abrir painel</a>
+    </div>
+    <div class="summary-grid three-cols">
+      <div class="mini-card"><strong>Pedidos</strong><span>Listagem, filtros e atualização de status</span></div>
+      <div class="mini-card"><strong>Tabela de preços</strong><span>Edição de valores por tipo de peça</span></div>
+      <div class="mini-card"><strong>Métricas</strong><span>Volume, pendências e receita</span></div>
+    </div>
+  </section>
+
+  <div id="authModal" class="modal hidden">
+    <div class="modal-box">
+      <button id="closeAuthBtn" class="close-btn" type="button">×</button>
+      <div class="modal-tabs">
+        <button type="button" class="tab-btn active" data-tab="login">Login</button>
+        <button type="button" class="tab-btn" data-tab="register">Cadastro</button>
+      </div>
+
+      <div id="authMessage" class="feedback hidden"></div>
+
+      <form id="loginForm" class="form-grid auth-panel">
+        <div class="field full">
+          <label for="loginEmail">E-mail</label>
+          <input id="loginEmail" type="email" required>
+        </div>
+        <div class="field full">
+          <label for="loginPassword">Senha</label>
+          <input id="loginPassword" type="password" required>
+        </div>
+        <button class="btn btn-primary full" type="submit">Entrar</button>
+      </form>
+
+      <form id="registerForm" class="form-grid auth-panel hidden">
+        <div class="field full">
+          <label for="registerName">Nome completo</label>
+          <input id="registerName" type="text" required>
+        </div>
+        <div class="field">
+          <label for="registerOab">OAB</label>
+          <input id="registerOab" type="text" required>
+        </div>
+        <div class="field">
+          <label for="registerPhone">Telefone</label>
+          <input id="registerPhone" type="text" required>
+        </div>
+        <div class="field full">
+          <label for="registerEmail">E-mail</label>
+          <input id="registerEmail" type="email" required>
+        </div>
+        <div class="field full">
+          <label for="registerSpecialty">Área principal</label>
+          <input id="registerSpecialty" type="text" placeholder="Ex.: Previdenciário" required>
+        </div>
+        <button class="btn btn-primary full" type="submit">Enviar cadastro para WhatsApp</button>
+      </form>
+    </div>
   </div>
 
-  <script>
-    const telefone = "5599999999999";
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const btnLogin = document.getElementById("btnLogin");
-      const btnCadastro = document.getElementById("btnCadastro");
-      const btnHeroCadastro = document.getElementById("btnHeroCadastro");
-      const modalLogin = document.getElementById("modalLogin");
-      const modalCadastro = document.getElementById("modalCadastro");
-      const modalSolicitacao = document.getElementById("modalSolicitacao");
-
-      if (btnLogin) {
-        btnLogin.addEventListener("click", () => {
-          modalLogin.style.display = "flex";
-        });
-      }
-
-      if (btnCadastro) {
-        btnCadastro.addEventListener("click", () => {
-          modalCadastro.style.display = "flex";
-        });
-      }
-
-      if (btnHeroCadastro) {
-        btnHeroCadastro.addEventListener("click", () => {
-          modalCadastro.style.display = "flex";
-        });
-      }
-
-      document.querySelectorAll(".fechar").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const modal = btn.closest(".modal");
-          if (modal) modal.style.display = "none";
-        });
-      });
-
-      window.addEventListener("click", (e) => {
-        document.querySelectorAll(".modal").forEach((modal) => {
-          if (e.target === modal) {
-            modal.style.display = "none";
-          }
-        });
-      });
-
-      const formCadastro = document.getElementById("formCadastro");
-      if (formCadastro) {
-        formCadastro.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const nome = document.getElementById("nome").value;
-          const email = document.getElementById("email").value;
-          const telefoneUsuario = document.getElementById("telefoneUsuario").value;
-          const area = document.getElementById("area").value;
-
-          const mensagem = `Novo cadastro:%0A%0ANome: ${nome}%0AE-mail: ${email}%0ATelefone: ${telefoneUsuario}%0AÁrea: ${area}`;
-          const url = `https://wa.me/${telefone}?text=${mensagem}`;
-          window.open(url, "_blank");
-        });
-      }
-
-      document.querySelectorAll(".area-card").forEach((card) => {
-        card.addEventListener("click", () => {
-          modalSolicitacao.style.display = "flex";
-        });
-
-        card.addEventListener("keypress", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            modalSolicitacao.style.display = "flex";
-          }
-        });
-      });
-
-      const formSolicitacao = document.getElementById("formSolicitacao");
-      if (formSolicitacao) {
-        formSolicitacao.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const tipo = document.getElementById("tipoPeca").value;
-          const prazo = document.getElementById("prazo").value;
-          const descricao = document.getElementById("descricao").value;
-
-          const mensagem = `Solicitação de serviço:%0A%0ATipo de peça: ${tipo}%0APrazo: ${prazo}%0ADescrição: ${descricao}%0A%0AEstou enviando também o comprovante do Pix.`;
-          const url = `https://wa.me/${telefone}?text=${mensagem}`;
-
-          const areaPix = document.getElementById("areaPix");
-          const btnWhatsappPix = document.getElementById("btnWhatsappPix");
-          areaPix.style.display = "block";
-          btnWhatsappPix.onclick = () => window.open(url, "_blank");
-        });
-      }
-    });
-
-    async function login() {
-      const email = document.getElementById("loginEmail").value;
-      const senha = document.getElementById("loginSenha").value;
-
-      try {
-        const response = await fetch("users.json");
-        const users = await response.json();
-        const usuario = users.find((u) => u.email === email);
-
-        if (!usuario) {
-          alert("Não há cadastro para este e-mail.");
-          return;
-        }
-
-        if (usuario.senha !== senha) {
-          alert("Senha incorreta.");
-          return;
-        }
-
-        window.location.href = "pagina-destino.html";
-      } catch (error) {
-        alert("Erro ao carregar usuários. Abra por servidor local para testar o login.");
-      }
-    }
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
